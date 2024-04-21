@@ -19,8 +19,8 @@ public class TodoService {
         return todoRepository.findByUsername(username);
     }
 
-    public void addTodo(Todo todo) {
-        todoRepository.save(Todo.builder()
+    public Todo addTodo(Todo todo) {
+        return todoRepository.save(Todo.builder()
                 .targetDate(todo.getTargetDate())
                 .description(todo.getDescription())
                 .done(false)
@@ -37,8 +37,8 @@ public class TodoService {
         return todo.orElse(null);
     }
 
-    public void updateTodo(Todo todo) {
+    public Todo updateTodo(Todo todo) {
         deleteTodo(todo.getId());
-        todoRepository.save(todo);
+        return todoRepository.save(todo);
     }
 }
