@@ -2,10 +2,8 @@ package com.adel.todo.controller;
 
 import com.adel.todo.model.Todo;
 import com.adel.todo.service.TodoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,16 @@ public class TodoController {
     @GetMapping
     public List<Todo> findByUsername(@PathVariable("username") String username) {
         return todoService.getTodosByUsername(username);
+    }
+
+    @GetMapping("/{id}")
+    public Todo findById(@PathVariable("id") Long id) {
+        return todoService.getTodoByID(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        todoService.deleteTodo(id);
+        return ResponseEntity.noContent().build();
     }
 }
