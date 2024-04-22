@@ -23,7 +23,6 @@ public class TodoService {
         return todoRepository.save(Todo.builder()
                 .targetDate(todo.getTargetDate())
                 .description(todo.getDescription())
-                .done(false)
                 .username(todo.getUsername()).build());
     }
 
@@ -41,7 +40,6 @@ public class TodoService {
         Todo existingTodo = getTodoByID(todo.getId());
         existingTodo.setTargetDate(todo.getTargetDate());
         existingTodo.setDescription(todo.getDescription());
-        existingTodo.setDone(todo.getDone());
         return todoRepository.save(existingTodo);
     }
 }

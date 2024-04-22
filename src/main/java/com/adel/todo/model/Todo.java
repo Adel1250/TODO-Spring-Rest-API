@@ -21,7 +21,6 @@ public class Todo {
     private Long id;
     @NotBlank(message = "Description is mandatory")
     private String description;
-    private Boolean done;
     private LocalDate targetDate;
     private String username;
 }
