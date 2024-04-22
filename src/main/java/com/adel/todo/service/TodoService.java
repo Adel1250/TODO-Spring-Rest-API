@@ -38,7 +38,10 @@ public class TodoService {
     }
 
     public Todo updateTodo(Todo todo) {
-        deleteTodo(todo.getId());
-        return todoRepository.save(todo);
+        Todo existingTodo = getTodoByID(todo.getId());
+        existingTodo.setTargetDate(todo.getTargetDate());
+        existingTodo.setDescription(todo.getDescription());
+        existingTodo.setDone(todo.getDone());
+        return todoRepository.save(existingTodo);
     }
 }

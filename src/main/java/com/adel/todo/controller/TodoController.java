@@ -38,10 +38,11 @@ public class TodoController {
         return todoService.updateTodo(Todo.builder()
                 .id(id)
                 .description(todoDto.getDescription())
-                .targetDate(todoDto.getTargetDate()).build());
+                .targetDate(todoDto.getTargetDate())
+                .done(Boolean.valueOf(todoDto.getDone())).build());
     }
 
-    @PostMapping("/{id}")
+    @PostMapping
     public Todo save(@PathVariable("username") String username, @RequestBody TodoDto todoDto) {
         return todoService.addTodo(Todo.builder()
                 .done(false)

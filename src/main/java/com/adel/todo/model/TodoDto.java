@@ -14,7 +14,6 @@ import java.time.LocalDate;
 public class TodoDto {
     @NotBlank(message = "Description is mandatory")
     private String description;
-    private Boolean done;
     private LocalDate targetDate;
-    private String username;
+    private String done;
 }
