@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/users/{username}/todos")
+@RequestMapping("/api/v1/users")
 public class TodoController {
     private final TodoService todoService;
 
@@ -22,23 +22,23 @@ public class TodoController {
         return "Success";
     }
 
-    @GetMapping
+    @GetMapping("/{username}/todos")
     public List<Todo> findByUsername(@PathVariable("username") String username) {
         return todoService.getTodosByUsername(username);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{username}/todos/{id}")
     public Todo findById(@PathVariable("id") Long id) {
         return todoService.getTodoByID(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{username}/todos/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         todoService.deleteTodo(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{username}/todos/{id}")
     public Todo update(@PathVariable("id") Long id, @RequestBody TodoDto todoDto) {
         return todoService.updateTodo(Todo.builder()
                 .id(id)
@@ -47,7 +47,7 @@ public class TodoController {
                 .done(Boolean.valueOf(todoDto.getDone())).build());
     }
 
-    @PostMapping
+    @PostMapping("/{username}/todos")
     public Todo save(@PathVariable("username") String username, @RequestBody TodoDto todoDto) {
         return todoService.addTodo(Todo.builder()
                 .done(false)
