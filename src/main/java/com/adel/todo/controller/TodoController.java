@@ -17,6 +17,11 @@ public class TodoController {
         this.todoService = todoService;
     }
 
+    @GetMapping("/basic-auth")
+    public String basicAuthCheck() {
+        return "Success";
+    }
+
     @GetMapping
     public List<Todo> findByUsername(@PathVariable("username") String username) {
         return todoService.getTodosByUsername(username);
